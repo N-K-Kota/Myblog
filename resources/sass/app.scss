@@ -1,0 +1,220 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import 'init';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+.wrapper{
+  background-color: #fffaf0;
+}
+.mainheader {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  box-shadow: 1px 1px 2px 2px #000;
+}
+.inner {
+  margin: auto;
+  width: 80%;
+}
+ul {
+  list-style: none;
+  margin:0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.hide {
+  display: none;
+}
+.selected {
+  background-color: $darkgrey;
+}
+@include pc() {
+  .topheader {
+    width: 100%;
+    text-align: center;
+    border-bottom:1px dotted #000;
+  }
+  .articles {
+    width: 100%;
+    &__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      font-size: 0px;
+      padding: 0 100px;
+      border:solid 1px #ccc;
+    }
+    &__list {
+      position: relative;
+      font-size: 0px;
+      width: 33%;
+      height: 350px;
+      font-size: 12px;
+      border-top: dotted 1px #ccc;
+      padding: 15px;
+      & a {
+        width: 100%;
+        height: 100%;
+      }
+      &:nth-child(3n-2):after,&:nth-child(3n-1):after {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 15px;
+        right: 0;
+        width: 0;
+        height: 320px;
+        border-right: dotted 1px #ccc;
+      }
+    }
+  }
+  .topfooter {
+    width: 100%;
+    background-color: #ccc;
+  }
+  .mynav {
+    width: 100%;
+    background-color: #f3f3f2;
+    margin-bottom: 50px;
+    &-inner {
+      padding: 5px 30px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    &__list {
+        border: none;
+        &__btn {
+            border: none;
+            font-size: 16px;
+            color: #89d2ff;
+        }
+        &__home {
+          flex-grow: 1;
+          text-align: left;
+        }
+    }
+
+
+  }
+  .homebtn {
+    font-size: $basefontsize;
+    color: #89d2ff;
+  }
+  .main-wrapper {
+    width: 100%;
+  }
+  .main-inner {
+    padding: 0 50px;
+    display: flex;
+    flex-flow: wrap;
+    text-align: center;
+  }
+  .blog-header {
+    margin-bottom: 20px;
+    font-size: $bgfontsize;
+    width: 100%;
+  }
+  .side-content {
+    flex-grow: 1;
+    &-new-articles {
+      text-align: center;
+    }
+  }
+  .main-content {
+    flex-grow: 3;
+    width: 600px;
+  }
+  .blog-content {
+    &__title {
+      font-size: $bgfontsize;
+      color: $darkgrey;
+    }
+    &__body {
+      font-size: $basefontsize;
+      color: #afafaf;
+    }
+  }
+  .custompagination {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+    font-size: 20px;
+  }
+
+  .writearticle-wrapper {
+    display: flex;
+  }
+  .texts-box {
+    flex-grow: 2;
+    border: solid 1px $basegrey;
+  }
+  .tags-box {
+    flex-grow: 1;
+    border: solid 1px $basegrey;
+    &-selectarea{
+      &__list:hover{
+        background-color: $darkgrey;
+      }
+    }
+  }
+
+  .selectedtags-content {
+    &__list {
+      background-color: $lightgreen;
+    }
+  }
+
+
+  .admin-page {
+    display: flex;
+    width: 100%;
+    &-aside {
+      flex-grow: 1;
+      background-color: $basegrey;
+    }
+    &-content {
+      flex-grow: 3;
+      border: 1px solid $basegrey;
+      background-color: #fff;
+    }
+  }
+  .admin-top-wrapper {
+    display: flex;
+
+  }
+  .admin-top-content {
+    flex-grow: 2;
+  }
+  .admin-top-aside {
+    flex-grow: 1;
+  }
+  .manage-table {
+    & thead,& tr {
+      border-top: solid 1px $basegrey;
+      border-bottom: solid 1px $basegrey;
+    }
+    & tr:nth-child(2n) {
+      background-color: $lightgrey;
+    }
+  }
+
+}    //PC終了
+@include phone {
+
+} //phone 終了

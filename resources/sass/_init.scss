@@ -1,0 +1,17 @@
+@mixin phone() {
+  @media screen and (max-width: 900px) {
+    @content;
+  }
+}
+@mixin pc() {
+  @media screen and (max-width: 2000px) {
+    @content;
+  }
+}
+$basegrey: #afafaf;
+$darkgrey: #444444;
+$lightgrey: #F7F8F9;
+$lightgreen: #f0ffff;
+$smfontsize: 10px;
+$basefontsize: 15px;
+$bgfontsize: 25px;
