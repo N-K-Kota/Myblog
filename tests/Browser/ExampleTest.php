@@ -19,9 +19,8 @@ class ExampleTest extends DuskTestCase
 
 
         $this->browse(function (Browser $browser){
-            $browser->visit('/login')
-                    ->pause(1000)
-                    ->assertPathIs('/login');
+            $browser->visit('/')
+                    ->assertSee('home');
         });
     }
 }

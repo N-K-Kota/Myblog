@@ -55,14 +55,14 @@ class AdminController extends Controller
           'max' => ':attribute は :max　より少なくしてね',
         ];
         $validatedata = Validator::make($request->all(), [
-          'title' => 'required|max:5'
+          'title' => 'required|max:254'
         ],$errmessages);
         if ($validatedata->fails()) {
             return redirect()->route('myaccount.edit', ['blogid' => $blogid, 'articleid'=>$articleid])->withErrors($validatedata);
         }
         $posted = $request->all();
         if (isset($posted['newtagnames'])){
-            $newtags = explode(',',$posted['newtagnames']);
+            $newtags = explode(',', $posted['newtagnames']);
             foreach($newtags as $newtag) {
                 Tag::create(['name' => $newtag]);
             }

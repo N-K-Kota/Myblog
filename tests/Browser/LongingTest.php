@@ -15,17 +15,18 @@ class LongingTest extends DuskTestCase
      */
     public function testExample()
     {
-        $user = factory(User::class)->create([
-          'name' => 'testuser1',
-          'email' => 'testuser1@mail.com',
-          'password' => 'localhost'
-        ]);
+        $user = factory(User::class)->make(
+          [
+            'email' => 'user1@mail.com',
+            'password' => 'localhost'
+          ]
+        );
         $this->browse(function (Browser $browser) use ($user){
             $browser->visit('/login')
             ->type('email', $user->email)
             ->type('password', $user->password)
             ->press('Login')
-            ->waitText('タイトル')
+            ->waitForText('タイトル')
             ->assertPathIs('/createuserblog');
         });
     }

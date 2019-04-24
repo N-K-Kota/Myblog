@@ -33,7 +33,7 @@ class UserblogController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $userinfo = $this->info->find($user->id);
+            $userinfo = $user->info;
             $userblog = $this->userblogs->where('id', $userinfo->userblog_id)->first();
             $tags = Tag::all();
 
