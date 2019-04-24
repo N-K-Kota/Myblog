@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blogslayout')
 @section('content')
 @if(isset($article))
 <div>

@@ -10,6 +10,7 @@ abstract class TestCase extends BaseTestCase
     use RefreshDatabase;
     public function setup(): void
     {
+        
        parent::setup();
     }
 }

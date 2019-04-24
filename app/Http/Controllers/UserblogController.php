@@ -12,21 +12,23 @@ use App\Info;
 class UserblogController extends Controller
 {
     private $userblogs;
-    private $articles;
-    private $info;
-    public function __construct(Userblog $userblogclass,Article $articleclass, Info $infoclass)
+
+    public function __construct(Userblog $userblogclass)
     {
         $this->userblogs = $userblogclass;
-        $this->articles = $articleclass;
-        $this->info = $infoclass;
+
     }
     //
     public function index(Userblog $blog_id)
     {
-
         $articles = $blog_id->articles()->simplePaginate(5);
+        if (Auth::check()) {
+            $userblogs = Auth::user()->userblogs;
+            return view('userblog.index',['userblog'=>$blog_id,'articles' => $articles, 'userblogs' => $userblogs]);
+        } else {
+            return view('userblog.index',['userblog'=>$blog_id,'articles' => $articles]);
+        }
 
-        return view('userblog.index',['userblog'=>$blog_id,'articles' => $articles]);
     }
 
     public function create()
@@ -36,12 +38,11 @@ class UserblogController extends Controller
             $userinfo = $user->info;
             $userblog = $this->userblogs->where('id', $userinfo->userblog_id)->first();
             $tags = Tag::all();
-
+            $userblogs = $user->userblogs;
             if($userblog === null) {
-
                 return view('auth.createUserblog',["id" => $user->id]);
             } else {
-                return view('myaccount.create',compact('userblog','tags'));
+                return view('myaccount.create',compact('userblog','tags','userblogs'));
             }
 
         } else {
@@ -82,8 +83,13 @@ class UserblogController extends Controller
     {
         $blog = $this->userblogs->where('id', $blog_id)->with('articles')->first();
         $article = $blog->articles()->find($entry);
+        if(Auth::check()) {
+            $userblogs = Auth::user()->userblogs;
+            return view("userblog.article", ["userblog" => $blog, "entry_id" => $entry, "article" => $article, "userblogs" => $userblogs]);
+        } else {
+            return view("userblog.article", ["userblog" => $blog, "entry_id" => $entry, "article" => $article]);
+        }
 
-        return view("userblog.article", ["userblog" => $blog, "entry_id" => $entry, "article" => $article]);
     }
 
     public function edit($id)

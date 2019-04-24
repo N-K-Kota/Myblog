@@ -21,7 +21,13 @@ class BlogsController extends Controller
     {
         //
         $articles = $this->article->get();
-        return view('blogs.index',["articles" => $articles]);
+        if(Auth::check()) {
+            $userblogs = Auth::user()->userblogs;
+            return view('blogs.index',["articles" => $articles, "userblogs" => $userblogs]);
+        } else {
+            return view('blogs.index',["articles" => $articles]);
+        }
+
     }
 
     /**
@@ -60,8 +66,13 @@ class BlogsController extends Controller
     {
         //
         $data = $this->article->where('id',$id)->get();
-        //dd($article[0]);
-        return view('blogs.blog',['article'=>$data[0]]);
+        if (Auth::check()) {
+            $userblogs = Auth::user()->userblogs;
+            return view('blogs.blog',['article' => $data[0], 'userblogs' => $userblogs]);
+        } else {
+            return view('blogs.blog',['article'=>$data[0]]);
+        }
+
     }
 
     /**

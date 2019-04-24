@@ -45,7 +45,8 @@ class AdminController extends Controller
         $article = $userblog->articles()->find($articleid);
         $tags = Tag::all();
         $syncedTag = $article->tags;
-        return view('myaccount.edit', ['article' => $article, 'userblog' => $userblog, 'tags' => $tags, 'syncedTag' => $syncedTag]);
+        $userblogs = $user->userblogs;
+        return view('myaccount.edit', ['article' => $article, 'userblogs' => $userblogs, 'userblog' => $userblog, 'tags' => $tags, 'syncedTag' => $syncedTag]);
     }
 
     public function updatearticle(Request $request,$blogid,$articleid)

@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('bloghome');
 });
 Route::resource('blogs','BlogsController');
-Route::get('articles', 'ArticleController@index');
-Route::post('articles', 'ArticleController@post');
-Route::get('articles/{id}','ArticleController@show');
+// Route::get('articles', 'ArticleController@index');
+// Route::post('articles', 'ArticleController@post');
+// Route::get('articles/{id}','ArticleController@show');
 Auth::routes();
 Route::get('createuserblog', 'UserblogController@createuserblog')->name('createuserblog.index');
 Route::post('createuserblog', 'UserblogController@storeuserblog')->name("createuserblog.store");

@@ -213,6 +213,33 @@ body {
       background-color: $lightgrey;
     }
   }
+  .usermenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.5);
+  }
+  .usermenu-box {
+    position: absolute;
+    top: 40px;
+    right: 25%;
+    width: 200px;
+    height: 330px;
+    background-color: #fff;
+  }
+  .blog-header-box {
+     display: flex;
+     padding: 0 25%;
+     &__item {
+         width: 12%;
+         flex-grow: 1;
+         &_space {
+           flex-grow: 2;
+         }
+     }
+  }
 
 }    //PC終了
 @include phone {

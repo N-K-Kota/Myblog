@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 
+import TagareaComponent from './components/TagareaComponent';
+
 window.Vue = require('vue');
 
 /**
@@ -21,7 +23,6 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,5 +30,23 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#blogslayoutapp',
+    components: {
+      TagareaComponent
+    },
+    data: function() {
+      return {
+        usermodal: false
+      };
+    },
+    methods: {
+      toggleusermodal: function() {
+        this.usermodal = !this.usermodal;
+      },
+      closeusermodal: function() {
+        this.usermodal = false;
+      }
+    }
 });
+
+const new

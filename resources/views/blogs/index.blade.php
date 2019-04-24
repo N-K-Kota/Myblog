@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends("layouts.blogslayout")
 @section("content")
 <div class="topheader">
   <h2>トップページ</h2>
