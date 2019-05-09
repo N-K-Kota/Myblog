@@ -10,7 +10,12 @@
     @endforeach
   </ul>
 </div>
+@endsection
+
+@section('footer')
 <div class="topfooter">
-  footer
+  <ul>
+    <li>footer</li>
+  </ul>
 </div>
 @endsection

@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -38,15 +38,15 @@ class User extends Authenticatable
     ];
     public function userblogs()
     {
-        return $this->hasMany('App\Userblog');
+        return $this->hasMany('App\Models\Userblog');
     }
     public function articles()
     {
-        return $this->hasManyThrough('App\Article','App\Userblog');
+        return $this->hasManyThrough('App\Models\Article','App\Models\Userblog');
     }
     public function info()
     {
-        return $this->hasOne('App\Info');
+        return $this->hasOne('App\Models\Info');
     }
 
 }

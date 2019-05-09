@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Article;
-use App\Tag;
+use App\Models\Article;
+use App\Models\Tag;
 class ArticleController extends Controller
 {
     //

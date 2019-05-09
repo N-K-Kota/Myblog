@@ -7,6 +7,6 @@ $factory->define(Userblog::class, function (Faker $faker) {
         //
         'user_id' => mt_rand(1,5),
         'title' => $faker->word,
-        'category' => $faker->word
+        'category' => 1
     ];
 });

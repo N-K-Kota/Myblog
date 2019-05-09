@@ -7,8 +7,8 @@
 
 require('./bootstrap');
 
-import TagareaComponent from './components/TagareaComponent';
-
+import TagareaComponent from './components/TagareaComponent.vue';
+import AddtagComponent from './components/AddtagComponent.vue';
 window.Vue = require('vue');
 
 /**
@@ -32,12 +32,15 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#blogslayoutapp',
     components: {
-      TagareaComponent
+      TagareaComponent,
+      AddtagComponent
     },
-    data: function() {
-      return {
-        usermodal: false
-      };
+    data: {
+        usermodal: false,
+        tagnames: [],
+        selectedtagnames: [],
+        responsejson: {},
+        isopentagmodal: false
     },
     methods: {
       toggleusermodal: function() {
@@ -45,8 +48,32 @@ const app = new Vue({
       },
       closeusermodal: function() {
         this.usermodal = false;
+      },
+      selecttag: function(id) {
+          if(!this.selectedtagnames.find( element => element == this.tagnames[id])
+            ){
+                this.selectedtagnames.push(this.tagnames[id]);
+            }
+      },
+      unchaintag: function(id) {
+          this.selectedtagnames.splice(id, 1);
+      },
+      closetagmodal: function(success) {
+          this.tagnames.push(success[1]);
+          this.isopentagmodal = false;
+      },
+      opentagmodal: function() {
+          this.isopentagmodal = true;
       }
+    },
+    created:  function() {
+        let axios = require('axios');
+        let vue = this;
+        axios.get('/api/tags').then(function(response){
+            vue.tagnames = response.data;
+        }).catch(function(err){
+            vue.responsejson = err;
+        });
     }
-});
 
-const new
+});

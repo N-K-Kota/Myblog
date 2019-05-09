@@ -7,6 +7,5 @@ $factory->define(App\Article::class, function (Faker $faker) {
         //
         'article' => $faker->text,
         'title' => $faker->word,
-        'userblog_id' => mt_rand(1,10),
     ];
 });

@@ -38,8 +38,8 @@
         {{ $userblog->articles()->paginate(5)->links('vendor.pagination.default') }}
       </div>
       <div class="side-content-category">
+      <h3>ここはタグリスト</h3>
         <ul>
-
         @foreach($article->tags as $tag)
           <li>{{ $tag->name }}</li>
         @endforeach

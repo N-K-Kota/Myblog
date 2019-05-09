@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Info extends Model
 
     public function user()
     {
-        return belongsTo('App\user');
+        return belongsTo('App\Models\User');
     }
 }

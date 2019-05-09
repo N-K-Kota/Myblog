@@ -1,0 +1,26 @@
+@extends('layouts.blogs')
+@section('content')
+<div class="faq-wrapper">
+  <main>
+    <section>
+      <h1>お問い合わせ</h1>
+      <a>お問いあわせフォーム</a>
+    </section>
+    <section>
+      <h2>ご質問内容</h2>
+      <ul>
+          <li>はてなポイントって何？</li>
+          <li>金額はいくら？</li>
+          <li>領収書が欲しいです</li>
+          <li>ブログをいくつも持ちたいです</li>
+       </ul>
+    </section>
+    <section>
+        <form>
+            @csrf
+            <label></label>
+        </form>
+    </section>
+  </main>
+<div>
+@endsection

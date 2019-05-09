@@ -1,21 +1,23 @@
 <template>
 <div class="tagarea-wrapper">
-  <tag-component v-for="(name, key) in tagnames" :key=key :tagid=key :tagname=name @clicktag="sendclickevent"></tag-component>
+  <tag-component v-for="(tag, key) in tagnameprops" v-bind:key="key" v-bind:tagid="key" v-bind:tagname="tag" v-on:clicktag="sendclickevent">
+  </tag-component>
+  <slot></slot>
 </div>
 </template>
 <script>
 import TagComponent from './TagComponent.vue';
 
 export default {
-  data: function() {
-    return {}
-  },
   methods: {
     sendclickevent: function(id) {
       this.$emit('clickevent', id);
     }
   },
-  props: ['tagnames']
+  components: {
+    TagComponent
+  },
+  props: ['tagnameprops']
 }
 </script>
 <style scoped>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,11 +11,11 @@ class Article extends Model
 
     public function userblog()
     {
-        return $this->belongsTo('App\Userblog');
+        return $this->belongsTo('App\Models\Userblog');
     }
     public function tags()
     {
-        return $this->belongsToMany('App\Tag');
+        return $this->belongsToMany('App\Models\Tag');
     }
 
 }

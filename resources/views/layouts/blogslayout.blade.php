@@ -6,11 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <script src="{{ asset('js/app.js') }}" defer></script>
+  <script src="{{ asset('js/myjquery.js') }}" defer></script>
   <title>blogs</title>
 </head>
 <body>
   <div id="blogslayoutapp">
     <header>
+
       <nav class="mynav">
         @auth
         <div class="blog-header">
@@ -26,9 +28,9 @@
               <li class="usermenu-box__item">
                 <a href="{{ route('userblog.index',['id' => $blog->id]) }}">{{ $blog->title }}</a>
                 <ul class="usermenu-box__item__pop">
-                  <li>ブログトップ</li>
-                  <li>記事をかく</li>
-                  <li>記事の管理</li>
+                  <li><a href="{{ route('blogs.index') }}">ブログトップ</a></li>
+                  <li><a href="{{ route('myaccount') }}">記事をかく</a></li>
+                  <li><a href="{{ route('myaccount.manage', ['blogid' => $blog->id]) }}">記事の管理</a></li>
                   <li>コメント</li>
                   <li>アクセス解析</li>
                   <li>設定</li>
@@ -62,13 +64,14 @@
             {!! Form::close() !!}
           </li>
         @endguest
-      </ul>
-      <nav>
+        </ul>
+      </nav>
     </header>
     <main>
       @yield('content')
     </main>
     <footer>
+      @yield('footer')
     </footer>
   </div>
 </body>

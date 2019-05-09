@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Userblog;
-use App\Article;
-use App\Tag;
-use App\Info;
+use App\Models\User;
+use App\Models\Userblog;
+use App\Models\Tag;
 class UserblogController extends Controller
 {
     private $userblogs;
@@ -55,12 +53,7 @@ class UserblogController extends Controller
     {
         if (Auth::check()) {
             $posted = $request->all();
-            if (isset($posted['newtagnames'])){
-                $newtags = explode(',',$posted['newtagnames']);
-                foreach($newtags as $newtag) {
-                    Tag::create(['name' => $newtag]);
-                }
-            }
+           
             $tagkeys = [];
             foreach($posted as $post) {
                 if (Tag::where('name', $post)->exists()) {
@@ -69,8 +62,8 @@ class UserblogController extends Controller
             }
             $myuserinfo = Auth::user()->info;
             $user_blog = Auth::user()->userblogs()->where('id', $myuserinfo->userblog_id)->first();
-            $user_blog->articles()->create(['article'=>$posted['article'], 'title' => $posted['title']]);
-            Article::where('title', $posted['title'])->first()->tags()->sync($tagkeys);
+            $article = $user_blog->articles()->create(['article'=>$posted['article'], 'title' => $posted['title']]);
+            $article->tags()->sync($tagkeys);
             $blog_id = $user_blog->id;
             return redirect()->route('userblog.index',["blog_id" => $blog_id]);
         } else {
@@ -89,7 +82,6 @@ class UserblogController extends Controller
         } else {
             return view("userblog.article", ["userblog" => $blog, "entry_id" => $entry, "article" => $article]);
         }
-
     }
 
     public function edit($id)
@@ -135,4 +127,15 @@ class UserblogController extends Controller
         $info->save();
         return redirect()->route('userblog.index',["blog_id" => $userblog->id]);
     }
+
+    public function notice()
+    {
+        $user = User::find(1);
+        $notices = $user->notifications;
+        foreach($notices as $notice) {
+            dd($notice->type);
+        }
+        return view('notice', ['notices' => $notices]);
+    }
+
 }

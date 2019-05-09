@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use App\Userblog;
-use App\User;
-use App\Tag;
-use App\Article;
+use App\Models\Userblog;
+use App\Models\User;
+use App\Models\Tag;
+use App\Models\Article;
+use App\Event\CreatedTagEvent;
+
 class AdminController extends Controller
 {
     //
 
-    public function __construct(Userblog $userblogclass)
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -33,7 +35,7 @@ class AdminController extends Controller
     public function manage($blogid)
     {
         $user = Auth::user();
-        $userblog = $user->userblogs()->where('id', $user->info->userblog_id)->first();
+        $userblog = $user->userblogs()->where('id', $blogid)->first();
         $articles = $userblog->articles;
         return view('myaccount.manage', ['userblog' => $userblog, 'articles' => $articles]);
     }
@@ -62,12 +64,7 @@ class AdminController extends Controller
             return redirect()->route('myaccount.edit', ['blogid' => $blogid, 'articleid'=>$articleid])->withErrors($validatedata);
         }
         $posted = $request->all();
-        if (isset($posted['newtagnames'])){
-            $newtags = explode(',', $posted['newtagnames']);
-            foreach($newtags as $newtag) {
-                Tag::create(['name' => $newtag]);
-            }
-        }
+       
         $tagkeys = [];
         foreach($posted as $post) {
             if (Tag::where('name', $post)->exists()) {
@@ -75,7 +72,7 @@ class AdminController extends Controller
             }
         }
 
-        $blogid = Auth::user()->info->userblog_id;
+        // $blogid = Auth::user()->info->userblog_id;
         $article = Article::find($articleid);
         $article->tags()->sync($tagkeys);
         $article->update(['title' => $request->title,'article' => $request->article]);
@@ -90,4 +87,5 @@ class AdminController extends Controller
         return redirect()->route('userblog.index',['id' => $posted['userblog_id']]);
     }
 
+    
 }

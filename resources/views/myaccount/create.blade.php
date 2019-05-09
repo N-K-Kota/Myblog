@@ -7,11 +7,12 @@
       タイトル:<input type="text" name="title"><br>
       <textarea class="postedtext" name="article" cols="20" rows="40"></textarea>
       <input type="hidden" name="category" value="1">
+      <input v-for="(tagname, key) in selectedtagnames" type="hidden" :value="tagname.name" :name="tagname.name+tagname.id" :key="key">
       <input type="submit" value="投稿する" id="submitbtn">
     </form>
 
   </div>
-  <aside class="tags-box">
+  <!-- <aside class="tags-box">
     <h2>タグ</h2>
     <p>タグリストから選択して下さい</p>
     <div class="selectedtags"><ul id="selectedtags-content"></ul></div>
@@ -22,9 +23,17 @@
         <li class="tags-content__list" id="tag{{ $tag->id }}" data-tagname="{{ $tag->name }}" data-id="{{ $tag->id }}">{{ $tag->name }}</li>
       @endforeach
     </ul>
+  </aside> -->
+  <aside class="tags-box">
+    <h2>タグ</h2>
+    <p>タグリストから選択してください</p>
+    <div id="createtagbtn" v-on:click="opentagmodal">+新しいタグ</div>
+    <addtag-component v-if=isopentagmodal v-on:success="closetagmodal"></addtag-component>
+    <tagarea-component v-bind:tagnameprops="selectedtagnames" v-on:clickevent="unchaintag"></tagarea-comonent>
+    <tagarea-component v-bind:tagnameprops="tagnames" v-on:clickevent="selecttag"></tagarea-comonent>
   </aside>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
   let tagsbox = document.querySelector('.tags-content');
   console.log(tagsbox);
@@ -122,5 +131,5 @@
     return true;
   }
 
-</script>
+</script> -->
 @endsection

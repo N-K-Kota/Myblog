@@ -10904,6 +10904,17 @@ body {
     width: 200px;
     height: 330px;
     background-color: #fff;
+    z-index: 9;
+  }
+
+  .usermenu-box__item__pop {
+    position: absolute;
+    top: 0;
+    right: 200px;
+    width: 200px;
+    height: 330px;
+    text-align: right;
+    display: none;
   }
 
   .blog-header-box {

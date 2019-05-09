@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Article;
+use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
+use App\Event\CreatedTagEvent;
+use App\Event\TestEvent;
 class BlogsController extends Controller
 {
     /**
@@ -21,6 +23,7 @@ class BlogsController extends Controller
     {
         //
         $articles = $this->article->get();
+        event(new TestEvent(str_random(100)));
         if(Auth::check()) {
             $userblogs = Auth::user()->userblogs;
             return view('blogs.index',["articles" => $articles, "userblogs" => $userblogs]);
@@ -51,7 +54,6 @@ class BlogsController extends Controller
     {
         //
         $posted = $request->all();
-        //$postdata = ['title' => $posted['title'],'article' => $posted['textarea']];
         $this->article->fill($posted)->save();
         return redirect()->route("blogs.index");
     }
@@ -65,6 +67,7 @@ class BlogsController extends Controller
     public function show($id)
     {
         //
+        event(new TestEvent(str_random(100)));
         $data = $this->article->where('id',$id)->get();
         if (Auth::check()) {
             $userblogs = Auth::user()->userblogs;

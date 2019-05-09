@@ -60,7 +60,7 @@
       <section class="admin-page-content">
         @yield('content')
       </section>
-    </dvi>
+    </div>
   </main>
   <footer>
   </footer>
